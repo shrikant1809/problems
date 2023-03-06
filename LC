@@ -1,0 +1,28 @@
+*
+ * @param {number[]} nums
+ * @return {number}
+  
+  maxProduct = function(nums) {
+    let arr =[]
+
+let max1 =Math.max(...nums)
+
+let ind1 = nums.indexOf(max1)
+
+let ex1 =nums.splice(ind1,1)
+
+arr.push(ex1)
+
+let max2 = Math.max(...nums)
+
+let ind2 = nums.indexOf(max2)
+
+let ex2 = nums.splice(ind2, 1)
+
+arr.push(ex2)
+
+let res =(arr[0]-1)*(arr[1]-1)
+
+return res
+    
+};
