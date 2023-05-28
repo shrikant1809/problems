@@ -1,0 +1,28 @@
+/**
+ * @param {number[]} prices
+ * @param {number} money
+ * @return {number}
+ */
+var buyChoco = function(prices, money) {
+  let minPrice1 = Infinity;  // Initialize the first minimum price to a very large value
+  let minPrice2 = Infinity;  // Initialize the second minimum price to a very large value
+
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] < minPrice1) {
+      // If the current price is smaller than the first minimum price, update both the first and second minimum prices
+      minPrice2 = minPrice1;
+      minPrice1 = prices[i];
+    } else if (prices[i] < minPrice2) {
+      // If the current price is smaller than the second minimum price, update only the second minimum price
+      minPrice2 = prices[i];
+    }
+  }
+
+  if (minPrice1 + minPrice2 <= money) {
+    // If the sum of the two minimum prices is less than or equal to your budget, return the leftover money
+    return money - (minPrice1 + minPrice2);
+  } else {
+    // Otherwise, return the original money since you cannot buy two chocolates without going into debt
+    return money;
+  }
+};
