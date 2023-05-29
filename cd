@@ -1,0 +1,12 @@
+function main() {
+  // Parse the input
+  const A = parseInt(inputString[0].trim());
+  const B = parseInt(inputString[1].trim());
+  const C = parseInt(inputString[2].trim());
+
+  // Find the minimum element
+  const min = Math.min(A, B, C);
+
+  // Output the result
+  console.log(min);
+}
