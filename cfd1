@@ -1,0 +1,92 @@
+const readline = require('readline');
+
+function playGame(n, a) {
+  // Function to make a move as the first player
+  function makeMoveFirst() {
+    let i = -1;
+    for (let j = 0; j < n; j++) {
+      if (a[j] > 0) {
+        i = j + 1;
+        break;
+      }
+    }
+    return i;
+  }
+
+  // Function to make a move as the second player
+  function makeMoveSecond(i) {
+    let j = -1;
+    for (let k = 0; k < n; k++) {
+      if (k !== i - 1 && a[k] > 0) {
+        j = k + 1;
+        break;
+      }
+    }
+    return j;
+  }
+
+  // Main game loop
+  while (true) {
+    // Read the opponent's move
+    const move = Number(readline());
+
+    if (move === 0) {
+      // The opponent can't make a move, so we win
+      break;
+    } else if (move === -1) {
+      // The opponent made an incorrect move, terminate the program
+      return;
+    } else if (move > 0) {
+      // Update the array based on the opponent's move
+      a[move - 1] -= Math.min(a[move - 1], a[0]);
+
+      // Make our move as the first player
+      const i = makeMoveFirst();
+
+      // Print our move
+      console.log(i);
+
+      // Flush the output
+      console.flush();
+    }
+
+    // Read the opponent's move
+    const move2 = Number(readline());
+
+    if (move2 === 0) {
+      // The opponent can't make a move, so we win
+      break;
+    } else if (move2 === -1) {
+      // The opponent made an incorrect move, terminate the program
+      return;
+    } else if (move2 > 0) {
+      // Update the array based on the opponent's move
+      a[move2 - 1] -= Math.min(a[move2 - 1], a[1]);
+
+      // Make our move as the second player
+      const j = makeMoveSecond(move2);
+
+      // Print our move
+      console.log(j);
+
+      // Flush the output
+      console.flush();
+    }
+  }
+}
+
+// Read the input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let n, a;
+rl.question('', (input) => {
+  n = Number(input);
+  rl.question('', (input) => {
+    a = input.split(' ').map(Number);
+    playGame(n, a);
+    rl.close();
+  });
+});
